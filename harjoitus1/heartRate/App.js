@@ -7,15 +7,23 @@ export default function App() {
     const [lowerLimit, setLowerLimit] = useState('');
     const [upperLimit, setUpperLimit] = useState('');
   
-    const calculateHeartRateLimits = () => {
-      if (age) {
-        const ageValue = parseInt(age);
-        const lower = Math.round((220 - ageValue) * 0.65);
-        const upper = Math.round((220 - ageValue) * 0.85);
+    const calculateHeartRateLimits = (ageValue) => {
+      if (ageValue) {
+        const ageInt = parseInt(ageValue);
+        const lower = Math.round((220 - ageInt) * 0.65);
+        const upper = Math.round((220 - ageInt) * 0.85);
   
         setLowerLimit(lower.toString());
         setUpperLimit(upper.toString());
+      } else {
+        setLowerLimit('');
+        setUpperLimit('');
       }
+    };
+
+    const handleAgeChange = (text) => {
+      setAge(text);
+      calculateHeartRateLimits(text);
     };
 
   return (
@@ -25,8 +33,7 @@ export default function App() {
       placeholder="Enter your age"
       keyboardType="numeric"
       value={age}
-      onChangeText={text => setAge(text)}/>
-      <Button title="Calculate" onPress={calculateHeartRateLimits}/>
+      onChangeText={handleAgeChange}/>
       <Text>Hr limits</Text>
       <Text>{lowerLimit} - {upperLimit}</Text>
       {/* <StatusBar style="auto" /> */}
