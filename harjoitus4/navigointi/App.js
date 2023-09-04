@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 import Homescreen from './screens/Homescreen';
 import SecondScreen from './screens/SecondScreen';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
 
