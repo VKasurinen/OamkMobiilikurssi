@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import Constants from 'expo-constants';
 import { convertFirebaseTimeStampToJS } from './helpers/Functions';
-import { sendMessage } from './config'; 
+//import { sendMessage } from './config'; 
+import { sendMessage, getUser } from './firebase/Config';
 import { collection, onSnapshot, query } from '@firebase/firestore';
 import { initializeApp } from 'firebase/app';
-import { firestore } from '@firebase/firestore'; // Import firestore from @firebase/firestore
+//import { firestore } from '@firebase/firestore'; 
+import firestore from '@react-native-firebase/firestore';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyAp8YOFScVew0sSbvruA_tQ-yx_rj5pns8",
@@ -32,7 +35,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    const q = query(collection(firestore(app), MESSAGES)); // Use firestore(app) to specify the app instance
+    const q = query(collection(firestore(app), MESSAGES)); 
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const tempMessages = [];
@@ -75,10 +78,6 @@ export default function App() {
     </SafeAreaView>
   );
 }
-
-
-
-
 
 
 
