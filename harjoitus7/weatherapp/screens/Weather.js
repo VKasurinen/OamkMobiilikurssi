@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { useEffect, useState } from 'react';
-
-const API_URL = 'api.openweathermap.org/data/2.5/weather?';
+//ec4d9c0f0a9b1dbe1bcd36a32a040bd1
+const API_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 const API_KEY = 'fd6ee9aa697124b327994d93e2014283';
 const ICON_URL = 'http://openweathermap.org/img/wn/';
 
@@ -15,7 +15,7 @@ const [icon, setIcon] = useState("");
 useEffect(() => {
     const url = API_URL + 
     'lat=' + latitude +
-    'lon=' + longitude + 
+    '&lon=' + longitude + 
     '&units=metric' +
     '&appid=' + API_KEY;
     fetch(url)
@@ -24,7 +24,7 @@ useEffect(() => {
         (result) => {
             setTemp(result.main.temp);
             setDescription(result.weather[0].description);
-            // setIcon(ICON_URL + result.weather[0].icon + '@2x.png');
+            setIcon(ICON_URL + result.weather[0].icon + '@2x.png');
         }, (error) => {
             alert(error);
             console.log(error);
@@ -38,7 +38,7 @@ useEffect(() => {
     <Text>{temp}</Text>
     <Text style={styles.label}>Description</Text>
     <Text>{description}</Text>
-    {/* <Image source={{uri: icon}} style={{width: 100, height: 100}} /> */}
+    <Image source={{uri: icon}} style={{width: 100, height: 100}} />
     </>
   )
 }
